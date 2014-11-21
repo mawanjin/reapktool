@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="reapktool:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/reapktool_jar</output-path>
+    <root id="archive" name="reapktool.jar">
+      <element id="module-output" name="reapktool" />
+    </root>
+  </artifact>
+</component>
