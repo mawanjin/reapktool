@@ -111,7 +111,7 @@ public class SplitApk {
                 if(line.contains(">")&&firstTag&&!lastTag){
                     lastTag = true;
                     //写入
-                    line = line+"\n"+"<meta-data android:value=\""+id+"\" android:name=\"myMsg\"></meta-data>";
+                    line = line+"\n"+"<meta-data android:value=\""+id+"\" android:name=\"qd_code\"></meta-data>";
                 }
 //                 if (line.contains("\"10000\"")) {
 //                    System.out.println(line);
