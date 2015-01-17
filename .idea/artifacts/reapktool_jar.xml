@@ -3,6 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/reapktool_jar</output-path>
     <root id="archive" name="reapktool.jar">
       <element id="module-output" name="reapktool" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/commons-io-2.4.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

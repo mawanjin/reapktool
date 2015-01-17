@@ -1,27 +1,32 @@
+import java.io.File;
+
 public class Main {
 
     public static void main(String[] args) {
         System.out.println("hi,i'm old ma.welcome!");
 
-//        if(args.length != 4) {
-//            System.out.println("usage:java -jar RyApkTool.jar apkName keyFile keyName  keyPasswd");
-//            System.out.println("Example: java -jar RyApkTool.jar test.apk myAndroidkey rydiy 123456");
-//            System.out.println("invalid numbers of parameter,needs 4.");
-//            return;
-//        }
-
-//        String apk = args[0];
-//        String keyFile = args[1];
-//        String keyName = args[2];
-//        String keyPasswd = args[3];
-//        System.out.println("apk="+apk+";keyFile="+keyFile+";keyName="+keyName+";keyPasswd="+keyPasswd);
-
         String apk = "test.apk";
-        String keyFile = "F:/workspace/keystore/paysdk.jks";
+        String keyFile = "/Users/lala/Documents/workspace/keystore/android/paysdk/paysdk.jks";
         String keyName = "paysdk";
         String keyPasswd = "123456";
+        String destDir = "";
+        boolean distribute = true;
 
-        SplitApk sp = new SplitApk(apk, keyFile, keyName, keyPasswd);
+        if (args.length == 6) {
+            apk = args[0];
+            keyFile = args[1];
+            keyName = args[2];
+            keyPasswd = args[3];
+            distribute = Boolean.parseBoolean(args[4]);
+            destDir = args[5];
+        }
+
+        if (!new File(apk).exists()) {
+            System.out.println("no apk specified.");
+            System.exit(0);
+        }
+
+        SplitApk sp = new SplitApk(apk, keyFile, keyName, keyPasswd, distribute, destDir);
         sp.mySplit();
     }
 }
