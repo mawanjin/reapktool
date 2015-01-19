@@ -109,18 +109,18 @@ public class SplitApk {
     // apktool解压apk，替换渠道值
     private void modifyQudao() throws Exception {
         String dir = apkName.split(".apk")[0];
-        System.out.println("delete previous apk package.");
-        FileUtils.forceDelete(new File(dir));
+        File o = new File(dir);
+        if(o.exists()){
+            System.out.println("delete previous apk package.");
+            FileUtils.forceDelete(o);
+        }
 
         System.out.println("run proc :: java -jar apktool.jar d " + apkName);
-
-
 
         runShell("java -jar apktool.jar d " + apkName);
         System.out.println("run proc complete,ready to backup AndroidManifest.xml");
 
         // 备份AndroidManifest.xml
-
         File packDir = new File(dir);
 
         String f_mani = packDir.getAbsolutePath() + "/AndroidManifest.xml";
@@ -243,7 +243,13 @@ public class SplitApk {
     }
 
     public void mySplit() {
-
+        if(!new File(destDir).exists()){
+            try {
+                FileUtils.forceMkdir(new File(destDir));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         setMapFile();
         try {
             modifyQudao();
