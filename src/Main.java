@@ -10,15 +10,20 @@ public class Main {
         String keyName = "paysdk";
         String keyPasswd = "123456";
         String destDir = "";
+        String countType="1";//1推广 2分享
+        String vNumber="";
+
         boolean distribute = true;
 
-        if (args.length == 6) {
+        if (args.length == 8) {
             apk = args[0];
             keyFile = args[1];
             keyName = args[2];
             keyPasswd = args[3];
             distribute = Boolean.parseBoolean(args[4]);
             destDir = args[5];
+            countType = args[6];
+            vNumber = args[7];
         }
 
         if (!new File(apk).exists()) {
@@ -26,7 +31,7 @@ public class Main {
             System.exit(0);
         }
 
-        SplitApk sp = new SplitApk(apk, keyFile, keyName, keyPasswd, distribute, destDir);
+        SplitApk sp = new SplitApk(apk, keyFile, keyName, keyPasswd, distribute, destDir,countType,vNumber);
         sp.mySplit();
     }
 }

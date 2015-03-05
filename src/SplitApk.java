@@ -19,9 +19,11 @@ public class SplitApk {
     String destDir;
     String  prefix = "mg";
     String suffix ;
+    String countType;
+    String vNumber;
 
     public SplitApk(String apkName, String keyFile, String keyName,
-                    String keyPasswd,boolean distribute,String destDir) {
+                    String keyPasswd,boolean distribute,String destDir,String countType,String vNumber) {
         this.curPath = new File("").getAbsolutePath();
         this.apkName = apkName;
         this.keyFile = keyFile;
@@ -29,6 +31,9 @@ public class SplitApk {
         this.keyPasswd = keyPasswd;
         this.distribute = distribute;
         this.destDir = destDir;
+        this.countType = countType;
+        this.vNumber = vNumber;
+
         Calendar calendar = Calendar.getInstance();
         String month = (calendar.get(Calendar.MONTH)+1)+"";
 
@@ -167,6 +172,7 @@ public class SplitApk {
                     lastTag = true;
                     //写入
                     line = line + "\n" + "<meta-data android:value=\"" + id + "\" android:name=\"qd_code\"></meta-data>";
+                    line = line + "\n" + "<meta-data android:value=\"" + countType + "\" android:name=\"count_type\"></meta-data>";
                     written = true;
                     firstTag = false;
                 }
@@ -187,7 +193,7 @@ public class SplitApk {
             runShell(cmdPack);
 
             // 签名
-            String signApk = "apk/"+prefix + "_" + dir + "_" + suffix + "_" + id + ".apk";
+            String signApk = "apk/"+prefix + "_" + dir + "_" + suffix + "_" + id + this.vNumber +".apk";
             String cmdKey = String.format("jarsigner -verbose -keystore %s " + " -storepass %s -signedjar %s -digestalg SHA1 -sigalg MD5withRSA %s %s", keyFile, keyPasswd, signApk, unsignApk, keyName);
             System.out.println("start sign apk[" + cmdKey + "]");
             runShell(cmdKey);
