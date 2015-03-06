@@ -50,10 +50,21 @@ public class SplitApk {
                 BufferedReader br = new BufferedReader(new FileReader(f));
                 String line = null;
                 while ((line = br.readLine()) != null) {
-                    String[] array = line.split("\t");
-                    if (array.length == 2) {
-                        qudao.put(array[0].trim(), array[1].trim());
+                    if(line.contains("-")){
+                        String[] a = line.split("-");
+                        int start = Integer.parseInt(a[0]);
+                        int end = Integer.parseInt(a[1]);
+                        for(int i=start;i<=end;i++){
+                            qudao.put(i+"",i+"");
+                        }
+                        break;
+                    }else{
+                        String[] array = line.split("\t");
+                        if (array.length == 2) {
+                            qudao.put(array[0].trim(), array[1].trim());
+                        }
                     }
+
                 }
             } catch (Exception e) {
                 e.printStackTrace();
