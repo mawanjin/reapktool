@@ -4,10 +4,11 @@ import org.apache.commons.io.FileUtils;
 import java.io.*;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class SplitApk {
-    HashMap<String, String> qudao = new HashMap<String, String>();
+    LinkedHashMap<String, String> qudao = new LinkedHashMap<String, String>();
     String curPath;
     String apkName;
     String keyFile;
